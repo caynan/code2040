@@ -1,4 +1,5 @@
 from code2040_client import ClientAPI
+from datetime import datetime, timedelta
 
 def solve_reverse_string(to_reverse):
     ans = {'string': to_reverse[::-1]}
@@ -24,5 +25,20 @@ def solve_prefix(input_dictionary):
     array = [string for string in array if not string.startswith(prefix)]
 
     ans = {'array': array}
+
+    return ans
+
+def solve_dating(input_dictionary):
+    datestamp = input_dictionary['datestamp']
+    interval = input_dictionary['interval']
+
+    # Convert data to datetime format
+    datestamp = datetime.strptime(datestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
+    interval = timedelta(0, interval)
+
+    # Calculate & format answer
+    ans = datestamp + interval
+    ans = ans.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
+    ans = {'datestamp': ans}
 
     return ans
