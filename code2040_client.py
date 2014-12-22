@@ -90,6 +90,15 @@ class ClientAPI(object):
 
         return response
 
+    def post_haystack(self, token, answer):
+        """
+
+        """
+        url = 'http://challenge.code2040.org/api/validateneedle'
+        conc = token.copy()
+        conc.update(answer)
+        response = self.__post_data(url, conc)
+
     def get_prefix(self, token):
         """
         Make a request to the ``prefix`` endpoint and get a dictionary
