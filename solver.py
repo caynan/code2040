@@ -16,3 +16,13 @@ def solve_haystack(input_dictionary):
     ans = {'needle': index}
 
     return ans
+
+def solve_prefix(input_dictionary):
+    prefix = input_dictionary['prefix']
+    array = input_dictionary['array']
+
+    array = [string for string in array if not string.startswith(prefix)]
+
+    ans = {'array': array}
+
+    return ans
