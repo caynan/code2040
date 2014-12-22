@@ -26,13 +26,13 @@ class ClientAPI(object):
 
         return token
 
-    def __get_data(self, url, token):
+    def __get_data(self, token, url):
         """
         Get data from the CODE2040 API using the given endpoint.
 
         Args:
-            url: the endpoint location.
             token: dictionary with token given in registration.
+            url: the endpoint location.
 
         Returns:
             Return the provided response, the type depend on the request.
@@ -40,12 +40,21 @@ class ClientAPI(object):
         response = requests.post(url, data=json.dumps(token)).json()
         return response['result']
 
-    def __post_data(self, url, data):
+    def __post_answer(self, token, url, answer):
         """
+        Post answer to the CODE2040 API problem using the given endpoint.
 
+        Args:
+            token: dictionary with token given in registration.
+            url: the endpoint location.
+            answer: the dictionary with the answer to the given problem
         """
-        # concatenate token and data dict into one.
-        response = request.post(url, data=json.dumps(data)).json()
+        # concatenate token and answer dict into one.
+        url = 'http://challenge.code2040.org/api/validatestring'
+        conc = token.copy()
+        conc.update(answer)
+        # post answer
+        request.post(url, data=json.dumps(conc)).json()
 
     def get_reverse_string(self, token):
         """
@@ -58,25 +67,26 @@ class ClientAPI(object):
             Returns the string, that should be reversed.
         """
         url = 'http://challenge.code2040.org/api/getstring'
-        response = self.__get_data(url, token)
+        response = self.__get_data(token, url)
 
         return response
 
     def post_reverse_string(self, token, answer):
         """
+        Post answer for the ``Reverse String`` problem.
 
+        Args:
+            token: dictionary with token given in registration.
+            url: the endpoint location.
+            answer: dictionary, with answer as value of key ``string``
         """
-        url = 'http://challenge.code2040.org/api/validatestring'
-        conc = token.copy()
-        conc.update(answer)
-        response = self.__post_data(url, conc)
-
-        return response['result']
+        url = 'http://challenge.code2040.org/api/prefix'
+        self.__post_answer(token, url, answer)
 
     def get_haystack(self, token):
         """
-        Make a request to the ``haystack`` endpoint and get a dictionary
-        with a list and a string to be searched.
+        Make a request to the ``haystack`` endpoint and get a
+        dictionary with a list and a string to be searched.
 
         Args:
             token: dictionary with token given in registration.
@@ -86,18 +96,22 @@ class ClientAPI(object):
             is a string. ``haystack``, is an array of strings.
         """
         url = 'http://challenge.code2040.org/api/haystack'
-        response = self.__get_data(url, token)
+        response = self.__get_data(token, url)
 
         return response
 
     def post_haystack(self, token, answer):
         """
+        Post answer for the ``haystack`` problem.
 
+        Args:
+            token: dictionary with token given in registration.
+            url: the endpoint location.
+            answer: dictionary with answer as value of key
+                ``needle``
         """
         url = 'http://challenge.code2040.org/api/validateneedle'
-        conc = token.copy()
-        conc.update(answer)
-        response = self.__post_data(url, conc)
+        self.__post_answer(token, url, answer)
 
     def get_prefix(self, token):
         """
@@ -112,18 +126,22 @@ class ClientAPI(object):
             is a string. ``array``, is an array of strings.
         """
         url = 'http://challenge.code2040.org/api/prefix'
-        response = self.__get_data(url, token)
+        response = self.__get_data(token, url)
 
         return response
 
     def post_prefix(self, token, answer):
         """
+        Post answer for the ``prefix`` problem.
 
+        Args:
+            token: dictionary with token given in registration.
+            url: the endpoint location.
+            answer: dictionary with answer array as value of key
+                ``array``
         """
         url = 'http://challenge.code2040.org/api/validateprefix'
-        conc = token.copy()
-        conc.update(answer)
-        response = self.__post_data(url, conc)
+        self.__post_answer(token, url, answer)
 
     def get_dating(self, token):
         """
@@ -139,22 +157,33 @@ class ClientAPI(object):
 
         """
         url = 'http://challenge.code2040.org/api/time'
-        response = self.__get_data(url, token)
+        response = self.__get_data(token, url)
 
         return response
 
-
     def post_dating(self, token, answer):
         """
+        Post answer for the ``dating`` problem.
+
+        Args:
+            token: dictionary with token given in registration.
+            url: the endpoint location.
+            answer: dictionary with answer as value of key
+                ``datestamp``
         """
         url = 'http://challenge.code2040.org/api/validatetime'
-        conc = token.copy()
-        conc.update(answer)
-        response = self.__post_data(url, conc)
+        self.__post_answer(token, url, answer)
 
     def get_status(self, token):
         """
+        Get status of the questions answered.
 
+        Args:
+            token: dictionary with token given in registration.
+
+        Returns:
+            Return a dictionary with the accepted questions, as
+            ``{'Stage X passed': 'True'[, ...]}``
         """
         url = 'http://challenge.code2040.org/api/status'
         response = self.__get_data(url, token)
