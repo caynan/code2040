@@ -142,3 +142,12 @@ class ClientAPI(object):
         response = self.__get_data(url, token)
 
         return response
+
+
+    def post_dating(self, token, answer):
+        """
+        """
+        url = 'http://challenge.code2040.org/api/validatetime'
+        conc = token.copy()
+        conc.update(answer)
+        response = self.__post_data(url, conc)
