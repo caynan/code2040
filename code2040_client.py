@@ -40,11 +40,12 @@ class ClientAPI(object):
         response = requests.post(url, data=json.dumps(token)).json()
         return response['result']
 
-    def __post_data(self, url, token, data):
+    def __post_data(self, url, data):
+        """
+
+        """
         # concatenate token and data dict into one.
-        conc = token.copy()
-        conc.update(data)
-        response = request.post(url, data=json.dumps(conc)).json()
+        response = request.post(url, data=json.dumps(data)).json()
 
     def get_reverse_string(self, token):
         """
@@ -60,6 +61,17 @@ class ClientAPI(object):
         response = self.__get_data(url, token)
 
         return response
+
+    def post_reverse_string(self, token, answer):
+        """
+
+        """
+        url = 'http://challenge.code2040.org/api/validatestring'
+        conc = token.copy()
+        conc.update(answer)
+        response = self.__post_data(url, conc)
+
+        return response['result']
 
     def get_haystack(self, token):
         """
