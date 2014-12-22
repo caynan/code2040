@@ -116,6 +116,15 @@ class ClientAPI(object):
 
         return response
 
+    def post_prefix(self, token, answer):
+        """
+
+        """
+        url = 'http://challenge.code2040.org/api/validateprefix'
+        conc = token.copy()
+        conc.update(answer)
+        response = self.__post_data(url, conc)
+
     def get_dating(self, token):
         """
         Make a request to the ``time`` endpoint and get a dictionary with
