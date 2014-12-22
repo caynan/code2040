@@ -151,3 +151,12 @@ class ClientAPI(object):
         conc = token.copy()
         conc.update(answer)
         response = self.__post_data(url, conc)
+
+    def get_status(self, token):
+        """
+
+        """
+        url = 'http://challenge.code2040.org/api/status'
+        response = self.__get_data(url, token)
+
+        return response
