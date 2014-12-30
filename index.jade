@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+  head
+    title CODE2040 - Caynan Sousa
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='_includes/CSS/style.css')
+
+  body
+    .container-fluid
+        //- Top bar
+        #top-bar.row
+            .col-sm-4
+                h1 CODE 2040
+
+            //- Log In form
+            .col-sm-8.text-right
+                form#login-form.form-inline(role='form')
+                    .form-group
+                    label.sr-only Email Address
+                    input.form-control(type='email', placeholder='Enter Email')
+                    input.form-control(type='url', placeholder='Github Repo')
+                    button#login-btn.btn.btn-default(type='submit') Log In
+
+        //- Tabbed content navbar
+        .row
+            #navbar.col-sm-12(role='tabpanel')
+                ul.nav.nav-pills(role='tablist')
+                    li.active: a(href='#about', role='tab', data-toggle='tab') About
+                    li: a(href='#stage-1', role='tab', data-toggle='tab') Stage I
+                    li: a(href='#stage-2', role='tab', data-toggle='tab') Stage II
+                    li: a(href='#stage-3', role='tab', data-toggle='tab') Stage III
+                    li: a(href='#stage-4', role='tab', data-toggle='tab') Stage IV
+                    li: a(href='#status', role='tab', data-toggle='tab') Status
+
+                .tab-content
+                    include _includes/about
+
+                    include _includes/stage-1
+
+                    include _includes/stage-2
+
+                    include _includes/stage-3
+
+                    include _includes/stage-4
+
+                    include _includes/status
+
+    //- JS
+    script(src="//code.jquery.com/jquery-1.11.2.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+
+
+
+
+
+
+
+

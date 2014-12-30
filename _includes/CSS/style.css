@@ -1,0 +1,15 @@
+html {
+  height: 102%; }
+
+#top-bar {
+  background: #3182bd;
+  radius: 15%; }
+  #top-bar h1 {
+    weight: 700;
+    color: white; }
+
+#login-form {
+  padding-top: 20px; }
+
+#navbar {
+  padding-top: 20px; }
