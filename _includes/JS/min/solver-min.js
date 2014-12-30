@@ -1,0 +1,1 @@
+function solve_reverse_string(e){return str.split("").reverse().join("")}function solve_haystack(e,n){return n.indexOf(e)}function solve_prefix(e,n){return n.filter(function(n){return n.substring(0,e.length)!=e?n:void 0})}function solve_dating(e,n){var t=new Date(n);return t.setSeconds(t.getSeconds()+e),t.toISOString()}

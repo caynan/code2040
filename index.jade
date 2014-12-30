@@ -15,12 +15,12 @@ html(lang="en")
                 h1 CODE 2040
 
             //- Log In form
-            .col-sm-8.text-right
+            #login-box.col-sm-8.text-right
                 form#login-form.form-inline(role='form')
                     .form-group
                     label.sr-only Email Address
-                    input.form-control(type='email', placeholder='Enter Email')
-                    input.form-control(type='url', placeholder='Github Repo')
+                    input#email-form.form-control(type='email', placeholder='Enter Email')
+                    input#github-form.form-control(type='url', placeholder='Github Repo')
                     button#login-btn.btn.btn-default(type='submit') Log In
 
         //- Tabbed content navbar
@@ -50,6 +50,7 @@ html(lang="en")
     //- JS
     script(src="//code.jquery.com/jquery-1.11.2.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+    script(src="_includes/JS/min/functions-min.js")
 
 
 
