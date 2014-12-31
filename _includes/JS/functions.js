@@ -17,16 +17,6 @@ function get_token(email, github) {
     return token;
 }
 
-
-function change_login_box(email, github, token) {
-    $('#login-box').html(
-        '<div id="login-box" class="col-sm-8 text-right">' +
-            '<strong>Email: </strong>' + email + '<br />' +
-            'Github: ' + github + '<br />' +
-            'Token: ' + token +' <br />' +
-        '</div>');
-}
-
 $(function () {
     // Get login info
     $('#login-btn').click(function () {
