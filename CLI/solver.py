@@ -9,9 +9,8 @@ def solve_haystack(input_dictionary):
     needle = input_dictionary['needle']
     haystack = input_dictionary['haystack']
 
-    index = None
-    if needle in haystack:
-        index = haystack.index(needle)
+    # It's guranteed that there is a needle on the haystack
+    index = haystack.index(needle)
 
     ans = {'needle': index}
 
