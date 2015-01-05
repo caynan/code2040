@@ -5,7 +5,6 @@ setup(
     version='0.1',
     py_modules=[
         'cli',
-        'code2040',
     ],
     include_package_data=True,
     install_requires=[
@@ -13,6 +12,7 @@ setup(
         'requests',
         # Colorama is only required for Windows.
         'colorama',
+        'six',
     ],
     entry_points='''
         [console_scripts]

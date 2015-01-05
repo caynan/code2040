@@ -3,6 +3,8 @@ import click
 import code2040
 import solver
 import six
+import pickle
+import os.path
 from code2040_client import ClientAPI
 
 
@@ -26,6 +28,32 @@ def get_status(api, token):
                 click.echo(key)
         click.echo('\n')
     click.pause()
+
+
+# Auxiliar Functions
+def get_info(user_dict):
+    email = user_dict['email']
+    github = user_dict['github']
+    token = user_dict['token']
+
+    click.echo(
+        '\n\tEmail: %s\n\tGithub: %s\n\tToken: %s\n' % (email, github, token)
+    )
+    click.pause()
+
+
+# Persistence
+## load info to `.code2040_data.p`
+def load_user_data():
+    user_data = {}
+    if os.path.exists('.code2040_data.p'):
+        user_data = pickle.load( open('.code2040_data.p', 'rb') )
+
+    return user_data
+
+## save info to `.code2040_data.p`
+def save_user_data(user_data):
+    pickle.dump( user_data, open('.code2040_data.p', 'wb') )
 
 
 # Solve Problems
@@ -77,7 +105,12 @@ def menu():
     """ A simple menu to easily iterate over API """
 
     # Global Variables
-    TOKEN = None
+    user = load_user_data()
+    if user.has_key('token'):
+        TOKEN = user['token']
+    else:
+        TOKEN = None
+
     API = ClientAPI()
 
     menu = 'main'
@@ -90,9 +123,10 @@ def menu():
                 click.echo('    q: quit')
             else:
                 click.echo('Main menu:')
-                click.echo('    r: get token')
                 click.echo('    s: solve problems')
                 click.echo('    g: get status')
+                click.echo('    r: get token')
+                click.echo('    i: get info')
                 click.echo('    q: quit')
 
             char = click.getchar()
@@ -104,10 +138,16 @@ def menu():
                 __phaseIII(API, TOKEN)
                 __phaseIV(API, TOKEN)
                 click.pause()
+
             elif char == 'g':
                 get_status(API, TOKEN)
+
+            elif char == 'i':
+                get_info(user)
+
             elif char == 'q':
                 menu = 'quit'
+
             else:
                 click.echo('Invalid input')
 
@@ -122,6 +162,7 @@ def menu():
                     '   Please enter the github repo'
                 )
                 TOKEN = get_token(API, email, github)
+                user = {'email': email, 'github': github, 'token': TOKEN}
                 menu = 'main'
             else:
                 click.echo('    n: get new token')
@@ -133,6 +174,8 @@ def menu():
                     menu = 'main'
                 else:
                     click.echo('Invalid input')
+
         elif menu == 'quit':
-            click.echo('See Ya!')
+            save_user_data(user)
+            click.echo("I'll save your progress! See Ya!")
             return

@@ -1,3 +1,4 @@
 *.codekit
 *.pyc
 *.egg-info
+*.p
