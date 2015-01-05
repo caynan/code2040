@@ -1,2 +1,3 @@
 *.codekit
 *.pyc
+*.egg-info

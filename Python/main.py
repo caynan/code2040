@@ -32,27 +32,33 @@ def get_token(api):
 
 
 def phaseI(api, token):
+    print 'Solving Phase I...'
     data = api.get_reverse_string(token)
-    solve = solver.solve_reverse_string()
+    solve = solver.solve_reverse_string(data)
     api.post_reverse_string(token, solve)
+    print 'Phase I, Solved!!'
 
 
 def phaseII(api, token):
+    print 'Solving Phase II'
     data = api.get_haystack(token)
-    solve = solver.solve_haystack()
+    solve = solver.solve_haystack(data)
     api.post_haystack(token, solve)
-
+    print 'Phase II, Solved!!'
 
 def phaseIII(api, token):
+    print 'Solving Phase III'
     data = api.get_prefix(token)
-    solve = solver.solve_reverse_string()
+    solve = solver.solve_prefix(data)
     api.post_prefix(token, solve)
-
+    print 'Phase III, Solved!!'
 
 def phaseIV(api, token):
+    print 'Solving Phase IV'
     data = api.get_dating(token)
-    solve = solver.solve_dating()
+    solve = solver.solve_dating(data)
     api.post_dating(token, solve)
+    print 'Phase IV, Solved!!'
 
 
 
@@ -75,7 +81,8 @@ def main():
     ## Phase IV
     phaseIV(api, token)
 
-
+    ## Status
+    print api.get_status(token)
 
 if __name__ == '__main__':
     main()

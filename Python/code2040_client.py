@@ -54,7 +54,7 @@ class ClientAPI(object):
         conc = token.copy()
         conc.update(answer)
         # post answer
-        request.post(url, data=json.dumps(conc)).json()
+        requests.post(url, data=json.dumps(conc)).json()
 
     def get_reverse_string(self, token):
         """
@@ -186,6 +186,6 @@ class ClientAPI(object):
             ``{'Stage X passed': 'True'[, ...]}``
         """
         url = 'http://challenge.code2040.org/api/status'
-        response = self.__get_data(url, token)
+        response = self.__get_data(token, url)
 
         return response
